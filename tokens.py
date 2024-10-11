@@ -1,9 +1,12 @@
+"""Actividad IA 10 de octubre. Tokenización."""
 import unicodedata
 import re
 from nltk import word_tokenize
 import nltk
-
 nltk.download('punkt_tab')
+from nltk.corpus import stopwords
+nltk.download('punkt')
+nltk.download('stopwords')
 
 texto ="""Linus Benedict Torvalds (Helsinki, Finlandia, 28 de diciembre de 19691​) es un ingeniero de software finlandés-estadounidense,2​ conocido por iniciar y mantener el desarrollo del kernel (en español, núcleo) Linux, basándose en el sistema operativo libre Minix creado por Andrew S. Tanenbaum y en algunas herramientas, varias utilidades y los compiladores desarrollados por el proyecto GNU. Actualmente es responsable de la coordinación del proyecto. También ha desarrollado el software de control de versiones Git.
 Biografía
@@ -63,11 +66,18 @@ def palabras_numeros(texto):
   return texto
 
 def eliminar_tildes(texto):
+  """Esta función elimina tildes"""
   return "".join(c for c in unicodedata.normalize("NFKD", texto) if not unicodedata.combining(c))
 
 
-def clean_text(text):
+def eliminar_stopwords(texto):
+    """Esta función elimina stopword, palabras que no aportan valor"""
+    stop_words = set(stopwords.words('spanish'))
+    texto = ' '.join([word for word in texto.split() if word.lower() not in stop_words])
+    return texto
 
+def clean_text(text):
+  """Esta función integra toda las funciones de limpieza de datos"""
   text = re.sub(r'\.\d+', '', text)
   text = re.sub(r'', '', text)
   text = re.sub(r'[^\w\s]', '', text)
@@ -75,9 +85,12 @@ def clean_text(text):
   text = eliminar_tildes(text)
   text = text.lower()
   text = palabras_numeros(text)
+  text = eliminar_stopwords(text)
   return text
 
+
 def tokenizar_texto(texto):
+  """Esta función tokeniza una palabra"""
   texto_limpio = clean_text(texto)
   tokens = word_tokenize(texto_limpio)
   return tokens
