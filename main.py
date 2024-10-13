@@ -1,13 +1,12 @@
-"""Actividad IA 10 de octubre. Tokenización."""
-import unicodedata
-import re
-from nltk import word_tokenize
 import nltk
-nltk.download('punkt_tab')
-from nltk.corpus import stopwords
+from text_cleaning.tokenization import tokenizar_texto
+from text_cleaning.lemmatization import lemmatize_text
+
+# Descarga de paquetes de nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 
+# Texto que vamos a  procesar
 texto ="""Linus Benedict Torvalds (Helsinki, Finlandia, 28 de diciembre de 19691​) es un ingeniero de software finlandés-estadounidense,2​ conocido por iniciar y mantener el desarrollo del kernel (en español, núcleo) Linux, basándose en el sistema operativo libre Minix creado por Andrew S. Tanenbaum y en algunas herramientas, varias utilidades y los compiladores desarrollados por el proyecto GNU. Actualmente es responsable de la coordinación del proyecto. También ha desarrollado el software de control de versiones Git.
 Biografía
 
@@ -54,46 +53,13 @@ En 2010, Torvalds se convirtió en ciudadano estadounidense fue registrado para 
 
 Linus ha desarrollado desde el año 2000 bastante interés por el buceo, lo que le ha llevado a conseguir numerosas certificaciones. También es el motivo de que posteriormente desarrollara el proyecto Subsurface.
 Controversias
-Linus se ha ganado la reputación de persona con la que nadie quiere trabajar.18​19​ En una conferencia en la Universidad Aalto declaró que Nvidia era “la peor empresa con la que habían tratado” y “foco de continuos problemas para Linux” mostrándoles luego el dedo medio.20​ Linus también criticó a Richard Stallman por tener un pensamiento de "blanco o negro".21​ Sin embargo, a pesar de que Linus declaró que "no [era] una buena persona y no me importa"22​ y abogar por la intimidación personal y la violencia,23​ a través de un comunicado anunció que se tomaría un descanso de sus actividades para aprender a controlar sus emociones.24​  """
-
-def palabras_numeros(texto):
-  patron = r'\b\w*[a-zA-Z]+\w*\d+\w*\b|\b\w*\d+\w*[a-zA-Z]+\w*\b'
-  palabras_con_numeros = re.findall(patron, texto)
-  palabras_limpias = [re.sub(r'\d+', '', word) for word in palabras_con_numeros]
-  diccionario = dict(zip(palabras_con_numeros, palabras_limpias))
-  for viejo, nuevo in diccionario.items():
-      texto = texto.replace(viejo, nuevo)
-  return texto
-
-def eliminar_tildes(texto):
-  """Esta función elimina tildes"""
-  return "".join(c for c in unicodedata.normalize("NFKD", texto) if not unicodedata.combining(c))
+Linus se ha ganado la reputación de persona con la que nadie quiere trabajar.18​19​ En una conferencia en la Universidad Aalto declaró que Nvidia era “la peor empresa con la que habían tratado” y “foco de continuos problemas para Linux” mostrándoles luego el dedo medio.20​ Linus también criticó a Richard Stallman por tener un pensamiento de "blanco o negro".21​ Sin embargo, a pesar de que Linus declaró que "no [era] una buena persona y no me importa"22​ y abogar por la intimidación personal y la violencia,23​ a través de un comunicado anunció que se tomaría un descanso de sus actividades para aprender a controlar sus emociones.24​ """
 
 
-def eliminar_stopwords(texto):
-    """Esta función elimina stopword, palabras que no aportan valor"""
-    stop_words = set(stopwords.words('spanish'))
-    texto = ' '.join([word for word in texto.split() if word.lower() not in stop_words])
-    return texto
-
-def clean_text(text):
-  """Esta función integra toda las funciones de limpieza de datos"""
-  text = re.sub(r'\.\d+', '', text)
-  text = re.sub(r'', '', text)
-  text = re.sub(r'[^\w\s]', '', text)
-  text = re.sub(r"(19|20|21)(\d{2})\d{2}", r"\1\2", text)
-  text = eliminar_tildes(text)
-  text = text.lower()
-  text = palabras_numeros(text)
-  text = eliminar_stopwords(text)
-  return text
-
-
-def tokenizar_texto(texto):
-  """Esta función tokeniza una palabra"""
-  texto_limpio = clean_text(texto)
-  tokens = word_tokenize(texto_limpio)
-  return tokens
-
+# Tokenización del texto
 texto_tokens = tokenizar_texto(texto)
-print(texto_tokens)
+print("Tokens:", texto_tokens)
+
+# Lematización del texto
+lemmatized_text = lemmatize_text(texto)
+print("Texto lematizado:", lemmatized_text)
