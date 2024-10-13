@@ -1,6 +1,6 @@
 import nltk
 from text_cleaning.tokenization import tokenizar_texto
-from text_cleaning.lemmatization import lemmatize_text
+from text_cleaning.lematization import lemmatize_text
 
 # Descarga de paquetes de nltk
 nltk.download('punkt')

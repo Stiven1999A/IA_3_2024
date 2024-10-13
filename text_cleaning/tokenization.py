@@ -1,5 +1,5 @@
 from nltk import word_tokenize
-from cleaning import clean_text
+from text_cleaning.cleaning import clean_text
 
 def tokenizar_texto(texto):
     """Esta función tokeniza el texto limpio"""
