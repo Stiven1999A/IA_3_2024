@@ -30,13 +30,13 @@ IA_3_2024/
 
 ## Instalación
 
-1. Clona el repositorio:
-    ```sh
-    git clone -b feature/NLTK <URL_DEL_REPOSITORIO>
-    ```
-2. Navega al directorio del proyecto:
+1. Navega al directorio del proyecto:
     ```sh
     cd IA_3_2024
+    ```
+2. Clona el repositorio:
+    ```sh
+    git clone https://github.com/Stiven1999A/IA_3_2024.git
     ```
 3. Instala las dependencias:
     ```sh
