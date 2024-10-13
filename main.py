@@ -1,3 +1,4 @@
+"""Ejemplo de Uso de las funciones de tokenización y lematización de texto"""
 import nltk
 from text_cleaning.tokenization import tokenizar_texto
 from text_cleaning.lematization import lemmatize_text
@@ -54,7 +55,6 @@ En 2010, Torvalds se convirtió en ciudadano estadounidense fue registrado para 
 Linus ha desarrollado desde el año 2000 bastante interés por el buceo, lo que le ha llevado a conseguir numerosas certificaciones. También es el motivo de que posteriormente desarrollara el proyecto Subsurface.
 Controversias
 Linus se ha ganado la reputación de persona con la que nadie quiere trabajar.18​19​ En una conferencia en la Universidad Aalto declaró que Nvidia era “la peor empresa con la que habían tratado” y “foco de continuos problemas para Linux” mostrándoles luego el dedo medio.20​ Linus también criticó a Richard Stallman por tener un pensamiento de "blanco o negro".21​ Sin embargo, a pesar de que Linus declaró que "no [era] una buena persona y no me importa"22​ y abogar por la intimidación personal y la violencia,23​ a través de un comunicado anunció que se tomaría un descanso de sus actividades para aprender a controlar sus emociones.24​ """
-
 
 # Tokenización del texto
 texto_tokens = tokenizar_texto(texto)
